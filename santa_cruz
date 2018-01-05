@@ -1,0 +1,213 @@
+## this is more data from more machines
+
+# Santa Cruz election 
+# touch screen voting machines - time to cast ballots
+# take the big excel file with multiple sheets and consolidate it into one object, 
+# adding a new column indicating the machine number
+############################
+library(dplyr)
+library(readxl)
+library(Hmisc)
+library(chron)
+library(ggplot2)
+library(lubridate)
+
+setwd("E:/JordanBerninger/santa_cruz_time_to_cast")
+
+{
+m1 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 1) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 54010) %>% mutate_all(as.character)
+
+m2 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 2) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 31480) %>% mutate_all(as.character)
+
+m3 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 3) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 11010) %>% mutate_all(as.character)
+
+m4 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 4) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 10381) %>% mutate_all(as.character)
+
+m5 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 5) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 14121) %>% mutate_all(as.character)
+
+m6 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 6) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 12024) %>% mutate_all(as.character)
+
+m7 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 7) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 12023) %>% mutate_all(as.character)
+
+m8 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 8) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 11120) %>% mutate_all(as.character)
+
+m9 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 9) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 10620) %>% mutate_all(as.character)
+
+m10 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 10) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 10603) %>% mutate_all(as.character)
+
+m11 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 11) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 10490) %>% mutate_all(as.character)
+
+m12 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 12) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 10410) %>% mutate_all(as.character)
+
+m13 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 13) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 31301) %>% mutate_all(as.character)
+
+m14 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 14) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 31300) %>% mutate_all(as.character)
+
+m15 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 15) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 31560) %>% mutate_all(as.character)
+
+m16 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 16) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 31630) %>% mutate_all(as.character)
+
+m17 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 17) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 30030) %>% mutate_all(as.character)
+
+m18 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 18) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 30020) %>% mutate_all(as.character)
+
+m19 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 19) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 31250) %>% mutate_all(as.character)
+
+m20 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 20) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 31240) %>% mutate_all(as.character)
+
+m21 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 21) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 50023) %>% mutate_all(as.character)
+
+m22 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 22) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 50021) %>% mutate_all(as.character)
+
+m23 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 23) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 50091) %>% mutate_all(as.character)
+
+m24 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 24) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 50061) %>% mutate_all(as.character)
+
+m25 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 25) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 51770) %>% mutate_all(as.character)
+
+m26 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 26) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 51090) %>% mutate_all(as.character)
+
+m27 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 27) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 54031) %>% mutate_all(as.character)
+
+m28 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 28) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 51010) %>% mutate_all(as.character)
+
+m29 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 29) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 50401) %>% mutate_all(as.character)
+
+m30 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 30) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 23311) %>% mutate_all(as.character)
+
+m31 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 31) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 22050) %>% mutate_all(as.character)
+
+m32 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 32) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 22040) %>% mutate_all(as.character)
+
+m33 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 33) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 20354) %>% mutate_all(as.character)
+
+m34 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 34) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 20351) %>% mutate_all(as.character)
+
+m35 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 35) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 20341) %>% mutate_all(as.character)
+
+m36 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 36) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 22010) %>% mutate_all(as.character)
+
+m37 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 37) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 20551) %>% mutate_all(as.character)
+
+m38 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 38) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 20541) %>% mutate_all(as.character)
+
+m39 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 39) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 23360) %>% mutate_all(as.character)
+
+m40 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 40) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 40162) %>% mutate_all(as.character)
+
+m41 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 41) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 40161) %>% mutate_all(as.character)
+
+m42 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 42) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 40071) %>% mutate_all(as.character)
+
+m43 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 43) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 43731) %>% mutate_all(as.character)
+
+m44 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 44) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 43710) %>% mutate_all(as.character)
+
+m45 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 45) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 43631) %>% mutate_all(as.character)
+
+m46 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 46) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 43100) %>% mutate_all(as.character)
+
+m47 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 47) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 40270) %>% mutate_all(as.character)
+
+m48 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 48) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 43621) %>% mutate_all(as.character)
+
+m49 <- read_xlsx("E:/JordanBerninger/santa_cruz_time_to_cast/DRETimeToCast.xlsx", sheet = 49) %>% 
+  select("date" = 1, "time" = 2, "am_pm" = 3, "number" = 4, "action" = 5, "time_to_cast" = 6) %>% mutate(machine = 43540) %>% mutate_all(as.character)
+}
+
+machines <- rbind(m1, m2, m3, m4, m5, m6, m7, m8, m9, m10,
+                  m11, m12, m13, m14, m15, m16, m17, m18, m19, m20,
+                  m21, m22, m23, m24, m25, m26, m27, m28, m29, m30,
+                  m31, m32, m33, m34, m35, m36, m37, m38, m39, m40,
+                  m41, m42, m43, m44, m45, m46, m47, m48, m49) %>% 
+            mutate(time = substr(time, 12, 19)) %>%
+            mutate(time_to_cast = substr(time_to_cast, 12, 19))
+# strip off the seconds form the time variable and then make the hour blocks
+# convert time_to_cast into seconds of a good class
+
+t2 <- machines %>% mutate(date = as.Date(date)) %>% 
+  mutate(cast_times = times(time_to_cast)) %>% 
+  mutate(cast_hms = hms(time_to_cast)) %>%
+  mutate(cast_difftime = as.difftime(time_to_cast, format = "%H:%M:%S", units = "mins"))
+
+str(t2)
+# there is one record which apparently took over 5.5 hours for them to vote
+# this does not seem realiastic, so I will remove the outlier
+t3 <- t2 %>% filter(cast_difftime != 334.900)
+
+ggplot(data = t3, aes(x = cast_difftime)) + geom_histogram(aes(fill = am_pm), stat = 'bin', bins = 50) + facet_grid(~am_pm)
+# this plot is useful
+#######################################################################################
+t4 <- t3 %>% mutate(day_time_hour = as.numeric(substring(time, 1, 2)))
+# now we have the hours of the day isolated
+ggplot(data = t4, aes(x = day_time_hour, fill = am_pm)) + geom_bar()
+# need to correct for am/pm
+t5 <- t4 %>% mutate(day_time_hour = ifelse(am_pm == "AM", day_time_hour, 12+day_time_hour)) %>%
+             mutate(day_time_hour = ifelse(day_time_hour == 24, 12, day_time_hour))
+ggplot(data = t5, aes(x = day_time_hour, fill = am_pm)) + geom_bar()
+#######################################################################################
+machines1 <- machines %>% mutate(cast_difftime = as.difftime(time_to_cast, format = "%H:%M:%S", units = "mins")) %>%
+  filter(cast_difftime != 334.900) %>%
+  mutate(day_time_hour = as.numeric(substring(time, 1, 2))) %>%
+  mutate(day_time_hour = ifelse(am_pm == "AM", day_time_hour, 12+day_time_hour)) %>%
+  mutate(day_time_hour = ifelse(day_time_hour == 24, 12, day_time_hour))
+  
+ggplot(data = machines1, aes(x = cast_difftime)) + 
+  geom_histogram(aes(fill = am_pm), stat = 'bin', bins = 50) + 
+  facet_grid(~am_pm)
+
+ggplot(data = machines1, aes(x = day_time_hour, fill = am_pm)) + geom_bar()
+
+
+###############################################################
+#write_csv(machines, path = "consolidated_dataframe.csv")
+
+# find a good time class for hours:muinutes:seconds
